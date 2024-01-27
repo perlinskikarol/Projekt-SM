@@ -1,0 +1,14 @@
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    if (huart == &huart3) {
+        if (znak != ';') {
+            msg[dlugosc] = znak;
+            dlugosc++;
+        } else {
+            command();
+            memset(msg, '\0', 200);
+            dlugosc = 0;
+        }
+        HAL_UART_Receive_IT(huart, &znak, 1);
+    }
+
+}

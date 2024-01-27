@@ -1,0 +1,28 @@
+void command() {
+    if (sscanf(msg, "temp=%f", &temp_req)) {
+        if (temp_req < 20.0)
+            temp_req = 20;
+        if (temp_req > 40.0)
+            temp_req = 40;
+        BMP280_expected = temp_req * 100;
+
+        saveData();
+    }
+
+    if (sscanf(msg, "kp=%f", &kp_req)) {
+        PID_PARAM_KP = kp_req;
+        saveData();
+        save_to_sdcard();
+    }
+
+    if (sscanf(msg, "ki=%f", &ki_req)) {
+        PID_PARAM_KI = ki_req;
+        saveData();
+        save_to_sdcard();
+    }
+
+    if (strcmp(msg, "save_data") == 0) {
+        save_to_sdcard();
+        send_uart("DATA HAS BEEN SAVED SUCCESSFULLY");
+    }
+}

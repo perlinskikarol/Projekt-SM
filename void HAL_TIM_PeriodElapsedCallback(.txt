@@ -1,0 +1,19 @@
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+    if (htim->Instance == TIM2) {
+
+    }
+    if (htim->Instance == TIM4) {
+        size =
+                sprintf(buffer,
+                        "{\"temperature\": %.2f, \"temperatureAnalog\": %.2f, \"reference\": %.2f, \"pwm\": %.2f, \"kp\": %.3f, \"ki\": %.3f\}\n",
+                        (float) temp32 / 100, (float) output_FIR,
+                        (float) BMP280_expected / 100, (float) wypelnienie / 10,
+                        (float) PID_PARAM_KP, (float) PID_PARAM_KI);
+        HAL_UART_Transmit(&huart3, (uint8_t*) buffer, size, 100);
+
+    }
+    if (htim == &htim9) {
+        HAL_ADC_Start_IT(&hadc1);
+    }
+
+}

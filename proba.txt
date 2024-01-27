@@ -1,0 +1,8 @@
+import serial #pip install pyserial
+import numpy as np
+from time import sleep
+import time
+import matplotlib.pyplot as plt
+import keyboard #pip install keyboard
+import re
+hSerial = serial.Serial('COM3', 115200, timeout=1, parity=serial.PARITY_NONE)
